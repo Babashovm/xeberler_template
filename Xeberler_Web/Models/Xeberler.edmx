@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="xeberlerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kateqoriya">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="kat_ad" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+          <Property Name="user_level" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Xeberler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="xeber_basliq" Type="nvarchar(max)" />
+          <Property Name="xeber_qisa" Type="nvarchar(max)" />
+          <Property Name="xeber_tam" Type="nvarchar(max)" />
+          <Property Name="xeber_sekil" Type="nvarchar" MaxLength="255" />
+          <Property Name="xeber_kat" Type="int" />
+        </EntityType>
+        <Association Name="Xeberler_fk0">
+          <End Role="Kateqoriya" Type="Self.Kateqoriya" Multiplicity="0..1" />
+          <End Role="Xeberler" Type="Self.Xeberler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kateqoriya">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Xeberler">
+              <PropertyRef Name="xeber_kat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="xeberlerModelStoreContainer">
+          <EntitySet Name="Kateqoriya" EntityType="Self.Kateqoriya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Xeberler" EntityType="Self.Xeberler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Xeberler_fk0" Association="Self.Xeberler_fk0">
+            <End Role="Kateqoriya" EntitySet="Kateqoriya" />
+            <End Role="Xeberler" EntitySet="Xeberler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="xeberlerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kateqoriya">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="kat_ad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Xeberlers" Relationship="Self.Xeberler_fk0" FromRole="Kateqoriya" ToRole="Xeberler" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <Property Name="user_level" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Xeberler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="xeber_basliq" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="xeber_qisa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="xeber_tam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="xeber_sekil" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="xeber_kat" Type="Int32" />
+          <NavigationProperty Name="Kateqoriya" Relationship="Self.Xeberler_fk0" FromRole="Xeberler" ToRole="Kateqoriya" />
+        </EntityType>
+        <Association Name="Xeberler_fk0">
+          <End Role="Kateqoriya" Type="Self.Kateqoriya" Multiplicity="0..1" />
+          <End Role="Xeberler" Type="Self.Xeberler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kateqoriya">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Xeberler">
+              <PropertyRef Name="xeber_kat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="xeberlerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kateqoriyas" EntityType="Self.Kateqoriya" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Xeberlers" EntityType="Self.Xeberler" />
+          <AssociationSet Name="Xeberler_fk0" Association="Self.Xeberler_fk0">
+            <End Role="Kateqoriya" EntitySet="Kateqoriyas" />
+            <End Role="Xeberler" EntitySet="Xeberlers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="xeberlerModelStoreContainer" CdmEntityContainer="xeberlerEntities">
+          <EntitySetMapping Name="Kateqoriyas">
+            <EntityTypeMapping TypeName="xeberlerModel.Kateqoriya">
+              <MappingFragment StoreEntitySet="Kateqoriya">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kat_ad" ColumnName="kat_ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="xeberlerModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="xeberlerModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="user_level" ColumnName="user_level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Xeberlers">
+            <EntityTypeMapping TypeName="xeberlerModel.Xeberler">
+              <MappingFragment StoreEntitySet="Xeberler">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="xeber_basliq" ColumnName="xeber_basliq" />
+                <ScalarProperty Name="xeber_qisa" ColumnName="xeber_qisa" />
+                <ScalarProperty Name="xeber_tam" ColumnName="xeber_tam" />
+                <ScalarProperty Name="xeber_sekil" ColumnName="xeber_sekil" />
+                <ScalarProperty Name="xeber_kat" ColumnName="xeber_kat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="xeberlerModelStoreContainer" CdmEntityContainer="xeberlerEntities">
+    <EntitySetMapping Name="Kateqoriyas">
+      <EntityTypeMapping TypeName="xeberlerModel.Kateqoriya">
+        <MappingFragment StoreEntitySet="Kateqoriya">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="kat_ad" ColumnName="kat_ad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="xeberlerModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="xeberlerModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="user_password" ColumnName="user_password" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="user_level" ColumnName="user_level" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Xeberlers">
+      <EntityTypeMapping TypeName="xeberlerModel.Xeberler">
+        <MappingFragment StoreEntitySet="Xeberler">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="xeber_basliq" ColumnName="xeber_basliq" />
+          <ScalarProperty Name="xeber_qisa" ColumnName="xeber_qisa" />
+          <ScalarProperty Name="xeber_tam" ColumnName="xeber_tam" />
+          <ScalarProperty Name="xeber_sekil" ColumnName="xeber_sekil" />
+          <ScalarProperty Name="xeber_kat" ColumnName="xeber_kat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

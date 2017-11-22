@@ -1,0 +1,52 @@
+﻿@model Xeberler_Web.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Xeber_Layout.cshtml";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Simple Login System</legend>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(a => a.user_name)</td>
+                <td>@Html.TextBoxFor(a => a.user_name)</td>
+                <td>@Html.ValidationMessageFor(a => a.user_name)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.user_password)
+                </td>
+                <td>
+                    @Html.PasswordFor(a => a.user_password)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.user_password)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}  
+
+
+

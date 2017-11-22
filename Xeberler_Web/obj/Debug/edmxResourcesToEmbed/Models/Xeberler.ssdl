@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="xeberlerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kateqoriya">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="kat_ad" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="user_level" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Xeberler">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="xeber_basliq" Type="nvarchar(max)" />
+    <Property Name="xeber_qisa" Type="nvarchar(max)" />
+    <Property Name="xeber_tam" Type="nvarchar(max)" />
+    <Property Name="xeber_sekil" Type="nvarchar" MaxLength="255" />
+    <Property Name="xeber_kat" Type="int" />
+  </EntityType>
+  <Association Name="Xeberler_fk0">
+    <End Role="Kateqoriya" Type="Self.Kateqoriya" Multiplicity="0..1" />
+    <End Role="Xeberler" Type="Self.Xeberler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kateqoriya">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Xeberler">
+        <PropertyRef Name="xeber_kat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="xeberlerModelStoreContainer">
+    <EntitySet Name="Kateqoriya" EntityType="Self.Kateqoriya" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Xeberler" EntityType="Self.Xeberler" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="Xeberler_fk0" Association="Self.Xeberler_fk0">
+      <End Role="Kateqoriya" EntitySet="Kateqoriya" />
+      <End Role="Xeberler" EntitySet="Xeberler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
